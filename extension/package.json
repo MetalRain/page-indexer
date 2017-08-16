@@ -1,0 +1,21 @@
+{
+  "name": "page-indexer",
+  "version": "1.0.0",
+  "description": "Bookmarks current page and sends URL to server for indexing.",
+  "main": "index.js",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
+    "webpack": "^3.5.5"
+  },
+  "scripts": {
+    "build-dev": "webpack",
+    "build": "webpack -p"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.16.2"
+  }
+}
