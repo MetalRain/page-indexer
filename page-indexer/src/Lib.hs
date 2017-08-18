@@ -1,6 +1,3 @@
-{-# LANGUAGE DataKinds       #-}
-{-# LANGUAGE TemplateHaskell #-}
-{-# LANGUAGE TypeOperators   #-}
 module Lib
     ( startApp
     ) where
@@ -10,19 +7,14 @@ import Data.Aeson.TH
 import Network.Wai
 import Network.Wai.Handler.Warp
 import Servant
+import qualified PageInfo as PI
+import qualified Page as P
 
-data User = User
-  { userId        :: Int
-  , userFirstName :: String
-  , userLastName  :: String
-  } deriving (Eq, Show)
-
-$(deriveJSON defaultOptions ''User)
-
-type API = "users" :> Get '[JSON] [User]
+type API = "pages" :> Get '[JSON] [P.Page]
+  :<|> "pages" :> ReqBody '[JSON] PI.PageInfo :> Post '[JSON] P.Page 
 
 startApp :: IO ()
-startApp = run 1234 app
+startApp = run 8000 app
 
 app :: Application
 app = serve api server
@@ -31,10 +23,13 @@ api :: Proxy API
 api = Proxy
 
 server :: Server API
-server = return users
+server = return pages
+  :<|> postPage
 
-users :: [User]
-users = [ User 1 "Isaac" "Newton"
-        , User 2 "Albert" "Einstein"
-        , User 3 "Stephen" "Hawking"
+pages :: [P.Page]
+pages = [ P.Page "https://google.com" ["search", "google"]
+        , P.Page "https://youtube.com" ["video", "media"]
         ]
+
+postPage :: PI.PageInfo -> Handler P.Page
+postPage info = return (P.Page (PI.url info) [])
