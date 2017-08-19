@@ -3,12 +3,9 @@
   "name": "Page Indexer",
   "description": "Bookmarks current page and analyzes page in server to get metadata.",
   "version": "0.1",
-  "background": {
-    "scripts": ["dist/extension.js"],
-    "persistent": false
-  },
   "browser_action": {
-    "default_title": "Send this page URL to indexer"
+    "default_title": "Send this page URL to indexer",
+    "default_popup": "popup.html"
   },
-  "permissions": ["activeTab", "tabs"]
+  "permissions": ["activeTab", "tabs", "<all_urls>"]
 }
