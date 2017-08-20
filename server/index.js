@@ -1,5 +1,4 @@
-const uniqBy = require('lodash/uniqBy')
-const {queryPagesWithTag, createPage, getPageWithUrl} = require('./query')
+const {queryPagesWithTag, getPagesWithTags, createPage, getPageWithUrl} = require('./query')
 const {errorHandler, validationError} = require('./errors')
 const {validateRequest, getPagesSchema, getPageInfoSchema, putPageSchema} = require('./schema')
 
@@ -23,22 +22,7 @@ exports.getPageInfo = (req, res) => {
   validateRequest(req, getPageInfoSchema)
     .catch(err => validationError(res, err))
     .then(validatedReq => getPageWithUrl(validatedReq.query.url))
-    .then(page => {
-        // Get 3 pages for each tag in this page
-        return Promise.all([page].concat(
-            (page.tags || []).map(tag => queryPagesWithTag(tag, 3))
-        ))
-    })
-    .then(([page, ...groupedByTag]) => {
-        // Flatten and filter related pages
-        const related = groupedByTag.reduce((result, relatedToTag) => {
-            const filtered = relatedToTag.filter(relatedPage => relatedPage.url !== page.url)
-            return result.concat(filtered)
-        }, [])
-        const uniqueRelatedPages = uniqBy(related, page => page.url)
-
-        return [page].concat(uniqueRelatedPages)
-    })
+    .then(page => Promise.all([page].concat(getPagesWithTags(page.tags, page.url))))
     .then(([page, ...related]) => res.status(200).json({page: page, related: related}))
     .catch(errorHandler(res))
 }
