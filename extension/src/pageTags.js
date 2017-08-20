@@ -27,8 +27,11 @@ const ruleFilter = rules => {
 }
 
 const blacklist = [
+    /^$/,
+    /^[0-9]+$/,
     /^\s+$/,
-    /^[^a-z0-9]{1,2}$/i
+    /^[^a-z0-9]{1,2}$/i,
+    /^(and|is|a|the|an|or|for|to|in|on|at|with)$/
 ]
 
 const commonCollectors = [
@@ -61,6 +64,8 @@ const tags = runCollectors(tagCollectors)
         return results.concat(tagLine.split(/[,\s]/))
     }, [])
     .map(trim)
+    .map(tag => trim(tag, ':-.,;'))
+    .map(tag => tag.toLowerCase())
     .filter(ruleFilter(blacklist))
 
 tags.sort()
