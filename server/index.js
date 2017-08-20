@@ -48,8 +48,8 @@ const putPageSchema = Joi.object().keys({
   body: Joi.object().keys({
     page: Joi.object().keys({
       url: Joi.string().min('http://a.fi'.length).max(2000).required(),
-      title: Joi.string().max(300),
-      image: Joi.string().max(2000),
+      title: Joi.string().max(300).required(),
+      image: Joi.string().max(2000).allow(null),
       tags: Joi.array().items(Joi.string().min(1).max(30))
     })
   })
