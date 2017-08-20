@@ -70,8 +70,8 @@ const titleCollectors = commonCollectors.concat([
 ])
 
 const imageCollectors = [
-    collect('meta[name="og:image"]', content),
-    collect('meta[property="og:image"]', content),
+    collectFirst('meta[name="og:image"]', content),
+    collectFirst('meta[property="og:image"]', content),
     collectFirst('[itemprop="articleBody"] img', imageSource),
     collectFirst('.article-body img', imageSource),
     collectFirst('article img', imageSource),
@@ -84,7 +84,7 @@ const tags = runCollectors(tagCollectors)
         return results.concat(tagLine.split(/[,\s]/))
     }, [])
     .map(trim)
-    .map(tag => trim(tag, ':-.,;\-/\/_"()[]{}+#%£$€~“”|'))
+    .map(tag => trim(tag, ':-.,;‘`\-/\/_"()[]{}+#%£$€~“”|'))
     .map(tag => tag.toLowerCase())
     .filter(ruleFilter(blacklist))
 
