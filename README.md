@@ -1,2 +1,2 @@
-# page-indexer
-Chrome extension for saving bookmarks & indexer server to make them more memorable.
+# Shared bookmarks
+Chrome extension for saving bookmarks & backend service for sharing bookmark data with other users.

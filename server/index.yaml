@@ -1,0 +1,6 @@
+indexes:
+  - kind: Page
+    properties:
+      - name: tags
+      - name: createdAt
+        direction: desc
