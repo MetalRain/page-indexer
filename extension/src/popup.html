@@ -3,20 +3,35 @@
 	<head>
 		<script src="index.js"></script>
 		<style>
+			html {
+				font-size: 12px;
+			}
 			body {
 				width: 500px;
 			}
+			#title {
+				font-size: 1.2rem;
+				margin-bottom: 0.5rem;
+			}
+			#tags {
+				font-size: 1rem;
+				margin-bottom: 0.5rem;
+			}
 			img {
+				float: left;
+				width: 160px;
+				margin-bottom: 0.5rem;
+				margin-right: 0.5rem;
 				max-width: 100%;
 				max-height: 100%;
 			}
 		</style>
 	</head>
 	<body>
-		<h1>Page info:</h1>
-		<div id="url"></div>
+		<div class="image-container">
+			<img id="image">
+		</div>
 		<div id="title"></div>
-		<img id="image">
 		<div id="tags"></div>
 		<button id="index">Bookmark</button>
 		<div id="result"></div>

@@ -5,13 +5,11 @@ const server = 'https://us-central1-ornate-factor-169811.cloudfunctions.net'
 // Listen for tags 
 chrome.runtime.onMessage.addListener(({type, url, title, image, tags}) => {
     if (type === 'page-indexer-tags') {
-        const urlEl = document.querySelector('#url')
         const tagsEl = document.querySelector('#tags')
         const titleEl = document.querySelector('#title')
         const imageEl = document.querySelector('img')
         const resultEl = document.querySelector('#result')
 
-        urlEl.innerText = url
         tagsEl.innerHTML = tags.join(', ')
         titleEl.innerText = title
         imageEl.src = image
