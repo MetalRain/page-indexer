@@ -49,9 +49,7 @@ const commonCollectors = [
     collectFirst('h1', innerText),
     collectFirst('[itemprop="name"]', innerText),
     collectFirst('meta[name="og:title"]', content),
-    collectFirst('meta[property="og:title"]', content),
-    collectFirst('meta[name="og:type"]', content),
-    collectFirst('meta[property="og:type"]', content),
+    collectFirst('meta[property="og:title"]', content)
 ]
 
 const tagCollectors = [

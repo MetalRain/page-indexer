@@ -23,6 +23,6 @@ exports.getPageInfo = (req, res) => {
     .catch(err => validationError(res, err))
     .then(validatedReq => getPageWithUrl(validatedReq.query.url))
     .then(page => Promise.all([page].concat(getPagesWithTags(page.tags, page.url))))
-    .then(([page, ...related]) => res.status(200).json({page: page, related: related}))
+    .then(([page, ...related]) => res.status(200).json({page: page, related: related[0]}))
     .catch(errorHandler(res))
 }
