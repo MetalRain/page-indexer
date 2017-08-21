@@ -17,10 +17,11 @@ Pages are saved in Google Datastore.
 
 ## Deployment
 
-```
+```sh
 gcloud datastore create-indexes index.yaml
-gcloud beta functions deploy getPages --stage-bucket BUCKET_NAME --trigger-http
-gcloud beta functions deploy putPage --stage-bucket BUCKET_NAME --trigger-http
+gcloud beta functions deploy getPageInfo --stage-bucket ${BUCKET_NAME} --trigger-http
+gcloud beta functions deploy getPages --stage-bucket ${BUCKET_NAME} --trigger-http
+gcloud beta functions deploy putPage --stage-bucket ${BUCKET_NAME} --trigger-http
 ```
 
 ## Debugging

@@ -1818,6 +1818,10 @@ minimist@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
 
+mithril@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/mithril/-/mithril-1.1.3.tgz#ece88a8e71a6906021c9b7a907abd40ec3d901b8"
+
 "mkdirp@>=0.5 0", mkdirp@^0.5.1, mkdirp@~0.5.0:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
@@ -2099,6 +2103,10 @@ punycode@1.3.2:
 punycode@^1.2.4, punycode@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
+
+purecss@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/purecss/-/purecss-1.0.0.tgz#3dbcd9e2a7592448a69acb705cce16311bf4b785"
 
 qs@~6.4.0:
   version "6.4.0"

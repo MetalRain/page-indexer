@@ -5,7 +5,8 @@ const URL = Joi.string().min('http://a.fi'.length).max(2000)
 
 exports.getPagesSchema = Joi.object().keys({
   query: Joi.object().keys({
-    tag: Tag.required()
+    tag: Tag.required(),
+    url: URL.allow(null)
   })
 })
 

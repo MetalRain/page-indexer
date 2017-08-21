@@ -2,55 +2,32 @@
 <html>
 	<head>
 		<script src="index.js"></script>
+		<link rel="stylesheet" href="pure-min.css"></link>
 		<style>
-			html {
-				font-size: 12px;
-			}
 			body {
 				width: 500px;
 			}
-			#title {
-				font-size: 1.2rem;
-				margin-bottom: 0.5rem;
+			.container {
+				padding: 0.5rem;
 			}
-			#tags {
-				font-size: 1rem;
-				margin-bottom: 0.5rem;
-			}
-			#image {
-				float: left;
-				width: 160px;
-				margin-bottom: 0.5rem;
-				margin-right: 0.5rem;
-				max-width: 100%;
-				max-height: 100%;
-			}
-			#result {
+			.tags {
 				list-style: none;
-				margin: 0;
-				padding: 0
+				padding: 0;
 			}
-			#result li {
-				font-size: 1rem;
-				height: 3rem;
+			.tag {
+				display: inline-block;
+				padding: 0.3rem;
+				border: 1px solid;
+				border-radius: 0.3rem;
+				margin-right: 0.5em;
+				margin-bottom: 0.5em;
 			}
-			#result img {
-				float: left;
-				height: 2.5rem;
-				margin-bottom: 0.5rem;
-				margin-right: 0.5rem;
-				max-width: 100%;
-				max-height: 100%;
+			.related {
+				list-style: none;
+				padding: 0;
+				font-size: 0.8em;
 			}
 		</style>
 	</head>
-	<body>
-		<div class="image-container">
-			<img id="image">
-		</div>
-		<div id="title"></div>
-		<div id="tags"></div>
-		<button id="index">Bookmark</button>
-		<ul id="result"></ul>
-	</body>
+	<body></body>
 </html>

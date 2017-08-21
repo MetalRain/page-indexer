@@ -1,11 +1,18 @@
 {
   "manifest_version": 2,
-  "name": "Page Indexer",
-  "description": "Bookmarks current page and analyzes page in server to get metadata.",
+  "name": "Smart Bookmarks",
+  "description": "Saves tags with bookmarks that help to find correct pages from older bookmarks.",
   "version": "0.1",
   "browser_action": {
     "default_title": "Send this page URL to indexer",
     "default_popup": "popup.html"
   },
-  "permissions": ["activeTab", "tabs", "<all_urls>"]
+  "permissions": ["activeTab", "tabs", "<all_urls>"],
+  "icons": {
+    "16": "icon-16.png",
+    "32": "icon-32.png",
+    "48": "icon-48.png",
+    "64": "icon-full-64.png",
+    "128": "icon-full-128.png"
+  }
 }

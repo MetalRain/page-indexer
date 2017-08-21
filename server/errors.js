@@ -8,3 +8,7 @@ exports.errorHandler = (res) => {
 exports.validationError = (res, joiError) => {
   res.status(400).send({errors: joiError.details})
 }
+
+exports.notFound = (res) => {
+  res.status(404).end()
+}
