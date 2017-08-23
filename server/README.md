@@ -1,8 +1,9 @@
 # Page backend
 
-Backend consists of two Google Cloud Functions:
-- getPages, for querying pages with tags
-- putPage, for adding new pages
+Backend consists of three Google Cloud Functions:
+- getPages, for querying pages with tag.
+- getPageInfo, for querying page and related pages with url.
+- putPage, for adding / updating new pages.
 
 Pages are saved in Google Datastore.
 
