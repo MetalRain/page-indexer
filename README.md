@@ -1,11 +1,12 @@
 # Smart bookmarks
-Chrome extension for saving bookmarks & backend service for sharing bookmark data with other users.
+Chrome extension for storing and viewing rich bookmark information and simple backend service for querying stored bookmarks.
 
 ## Why?
-I tend to bookmark many pages, but when I need to find that thing again, I cannot remember what page was or what was the title. Having tags in bookmarks allows me to search for bookmarks having tags.
+I like to bookmark many cool pages, but never visit them afterwards. As this extension shows some related bookmarks there is higher chance to revisit interesting articles or other content. 
+
+Once enough data has been collected, backend can be replaced with more intelligent one.
 
 ## Server
-
 Server is implemented as three Google Cloud Functions. See more from [server](server/README.md).
 
 ## Frontend
