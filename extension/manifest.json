@@ -1,10 +1,10 @@
 {
   "manifest_version": 2,
   "name": "Smart Bookmarks",
-  "description": "Saves tags with bookmarks that help to find correct pages from older bookmarks.",
-  "version": "0.1",
+  "description": "Chrome extension for storing and viewing rich bookmark information.",
+  "version": "0.2",
   "browser_action": {
-    "default_title": "Send this page URL to indexer",
+    "default_title": "Save current page",
     "default_popup": "popup.html"
   },
   "permissions": ["activeTab", "tabs", "<all_urls>"],

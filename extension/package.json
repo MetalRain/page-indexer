@@ -1,7 +1,7 @@
 {
   "name": "page-indexer",
   "version": "1.0.0",
-  "description": "Bookmarks current page and sends URL to server for indexing.",
+  "description": "Chrome extension for storing and viewing rich bookmark information.",
   "main": "index.js",
   "devDependencies": {
     "babel-core": "^6.26.0",
