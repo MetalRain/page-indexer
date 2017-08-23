@@ -3,8 +3,8 @@ const db = datastore()
 const uniqBy = require('lodash/uniqBy')
 const flatten = require('lodash/flatten')
 
-const outputPage = ({url, title, image, tags}) => {
-  return {url, title, image, tags}
+const outputPage = ({url, title, image, tags, createdAt}) => {
+  return {url, title, image, tags, updatedAt: createdAt}
 }
 
 exports.getPageWithUrl = (url) => {

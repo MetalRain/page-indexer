@@ -1,6 +1,7 @@
 /* global chrome */
 const server = 'https://us-central1-ornate-factor-169811.cloudfunctions.net'
 const m = require('mithril')
+const moment = require('moment')
 
 const oneTwo = (one, two) => {
     return [
@@ -10,86 +11,97 @@ const oneTwo = (one, two) => {
 }
 const id = a => a
 
-const tagsForPage = (page, changeFn = id) => {
+const tagsForPage = (page, changeFn = id, highlight = []) => {
     return m('ul.tags', page.tags.map(tag => {
-        return m('li.tag', {onclick: () => changeFn(page, tag)}, tag)
+        if (highlight.indexOf(tag) !== -1){
+            return m('li.tag.highlight', {onclick: () => changeFn(page, tag)}, tag)   
+        } else {
+            return m('li.tag', {onclick: () => changeFn(page, tag)}, tag)
+        }
     }))
 }
 
+const error = (name, err) => {
+    console.error(name, err, err.stack)
+}
+
 const App = {
-    sending: false,
     fetching: false,
-    page: { url: '', title: '', image: '', tags: [] },
+    page: { url: '', title: '', image: '', tags: []},
+    resultTitle: '',
     related: [],
-    loadPage: (page) => {
+    loadPage: page => {
         App.page = page
         m.redraw()
-        App.getRelated(page.url)
+        App.getRelated(page, true)
     },
-    getRelated: url => {
+    getRelated: (page, tryBookmark = false) => {
+        const url = page.url
         App.related = []
         App.fetching = true
-        m.redraw()
 
         console.log('getRelated', url)
-        m.request(`${server}/getPageInfo`, {data: {url}})
+        return m.request(`${server}/getPageInfo`, {data: {url}})
             .then((response) => {
                 console.log('getRelated', url, response)
                 if (response && response.related.length > 0) {
+                    App.resultTitle = 'Pages like this:'
                     App.related = response.related
-                    App.fetching = false
-                    m.redraw()
+                } else {
+                    App.resultTitle = 'No pages like this!'
                 }
+                App.fetching = false
             })
             .catch(err => {
-                console.error('getRelated', err)
+                error('getRelated', err)
+                App.resultTitle = ''
                 App.related = []
-                App.fetching = false
-                m.redraw()
+                if (tryBookmark){
+                    App.bookmark(page)
+                } else {
+                    App.fetching = false
+                }
             })
     },
     getWithTag: (page, tag) => {
         App.page = page
         App.related = []
         App.fetching = true
-        m.redraw()
 
         console.log('getWithTag', tag)
         m.request(`${server}/getPages`, {data: {tag, url: page.url}})
             .then((response) => {
                 console.log('getWithTag', tag, response)
+                App.resultTitle = `Pages with tag: '${tag}'`
                 if (response && response.pages.length > 0) {
                     App.related = response.pages
+                } else {
+                    App.resultTitle = `No pages with tag: '${tag}'`
                 }
                 App.fetching = false
-                m.redraw()
             })
             .catch(err => {
-                console.error('getWithTag', err)
+                error('getWithTag', err)
+                App.resultTitle = ''
                 App.related = []
                 App.fetching = false
-                m.redraw()
             })
 
     },
     bookmark: (page) => {
         console.log('bookmark', page)
-        App.sending = true
         m.request(`${server}/putPage`, {method: 'POST', data: {page}})
             .then(() => {
                 console.log('bookmarked', page)
-                App.sending = false
-                m.redraw()
+                App.getRelated(page)
             })
             .catch(err => {
-                console.error('bookmark', err)
-                App.sending = false
-                m.redraw()
+                App.fetching = false
+                error('bookmark', err)
             })
     },
     view: vnode => {
         let fetching = vnode.state.fetching
-        let sending = vnode.state.sending
         let page = vnode.state.page
         let related = vnode.state.related
         return m('.pure-g', [
@@ -97,13 +109,12 @@ const App = {
                 m('img.pure-img', {src: page.image}),
                 [
                     m('h1', page.title),
-                    tagsForPage(page, App.getWithTag),
-                    m('button', {onclick: () => App.bookmark(page)}, 'Bookmark')
+                    tagsForPage(page, App.getWithTag)
                 ]
             ),
-            m('.pure-u', [
-                (fetching ? m('div', 'Fetching..') : []),
-                (sending ? m('div', 'Sending..') : []),
+            oneTwo([], m('h2', vnode.state.resultTitle)),
+            m('.pure-u-1-1', [
+                fetching ? m('.loader.center') : []
             ]),
             m('.pure-u', [
                 related ? 
@@ -113,8 +124,9 @@ const App = {
                                 oneTwo(
                                     m('img.pure-img', {src: relatedPage.image}),
                                     [
-                                        m('a', {onclick: () => App.loadPage(relatedPage)}, relatedPage.title),
-                                        tagsForPage(relatedPage, App.getWithTag),
+                                        m('a', {href: relatedPage.url, target: '_blank'}, m('h2', relatedPage.title)),
+                                        m('span.timestamp', moment(relatedPage.updatedAt).fromNow()),
+                                        tagsForPage(relatedPage, App.getWithTag, page.tags),
                                     ]
                                 )
                             )

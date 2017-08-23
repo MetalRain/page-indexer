@@ -1,33 +1,64 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<script src="index.js"></script>
-		<link rel="stylesheet" href="pure-min.css"></link>
-		<style>
-			body {
-				width: 500px;
-			}
-			.container {
-				padding: 0.5rem;
-			}
-			.tags {
-				list-style: none;
-				padding: 0;
-			}
-			.tag {
-				display: inline-block;
-				padding: 0.3rem;
-				border: 1px solid;
-				border-radius: 0.3rem;
-				margin-right: 0.5em;
-				margin-bottom: 0.5em;
-			}
-			.related {
-				list-style: none;
-				padding: 0;
-				font-size: 0.8em;
-			}
-		</style>
-	</head>
-	<body></body>
+  <head>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="pure-min.css"></link>
+    <style>
+      body {
+        width: 500px;
+      }
+      h1, h2 {
+        margin-top: 0;
+      }
+      .container {
+        padding: 0.5rem;
+      }
+      .timestamp {
+        margin-bottom: 0.5em;
+      }
+      .tags {
+        list-style: none;
+        padding: 0;
+      }
+      .tag {
+        display: inline-block;
+        padding: 0.3rem;
+        border: 1px solid;
+        border-radius: 0.3rem;
+        margin-right: 0.5em;
+        margin-bottom: 0.5em;
+      }
+      .tag.highlight{
+        background-color: #3498db;
+        color: white;
+      }
+      .related {
+        list-style: none;
+        padding: 0;
+      }
+      .center {
+        margin: 0 auto;
+      }
+      .loader {
+        border: 8px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 8px solid #3498db;
+        width: 30px;
+        height: 30px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }
+
+      @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+  <body></body>
 </html>

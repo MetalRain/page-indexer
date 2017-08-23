@@ -41,7 +41,8 @@ const blacklist = [
     /^[0-9]+$/,
     /^\s+$/,
     /^[^a-z0-9]{1,2}$/i,
-    /^(and|is|a|the|an|as|or|for|to|in|on|at|with|that|this|can|do|did|what|out|why|also)$/
+    /^[a-z]{1,3}$/,
+    /^(with|that|this|also)$/
 ]
 
 const commonCollectors = [
@@ -57,6 +58,7 @@ const tagCollectors = [
     collectFirst('meta[property="tags"]', content),
     collectFirst('meta[name="keywords"]', content),
     collectFirst('meta[property="keywords"]', content),
+    collect('meta[property="article:tag"]', content),
     collectFirst('meta[name="parsely-page"', parselyTags)
 ].concat(commonCollectors)
 
